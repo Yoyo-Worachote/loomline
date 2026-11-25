@@ -22,17 +22,17 @@ const FLAGS: Record<string, Partial<StationSpec>> = {
   q29: { x: 214, y: 504 },
   q37: { x: 152, y: 452 },
   q50: { x: 84, y: 520 },
-  q3: { landmark: true, name: t('ศาลาแก้ว', 'Glass Pavilion') },
-  q12: { landmark: true, name: t('หอเหล็กถัก', 'Lace Iron Tower') },
-  q17: { landmark: true, name: t('โรงละครกำมะหยี่', 'Velvet Opera') },
-  q22: { landmark: true, name: t('เนินศิลปิน', "Painters' Hill") },
-  q25: { landmark: true, name: t('สวนทิวลิป', 'Tulip Parterre') },
-  q36: { landmark: true, name: t('ตลาดหนังสือริมน้ำ', 'Quayside Bookstalls') },
-  q41: { landmark: true, name: t('ประตูชัยใต้', 'Southern Arch') },
+  q3: { landmark: true, name: t('Glass Pavilion', 'Glass Pavilion') },
+  q12: { landmark: true, name: t('Lace Iron Tower', 'Lace Iron Tower') },
+  q17: { landmark: true, name: t('Velvet Opera', 'Velvet Opera') },
+  q22: { landmark: true, name: t("Painters' Hill", "Painters' Hill") },
+  q25: { landmark: true, name: t('Tulip Parterre', 'Tulip Parterre') },
+  q36: { landmark: true, name: t('Quayside Bookstalls', 'Quayside Bookstalls') },
+  q41: { landmark: true, name: t('Southern Arch', 'Southern Arch') },
 };
 
 const stations: StationSpec[] = [
-  { id: 'q0', x: C.x, y: C.y - 22, symbol: 'any', hub: true, name: t('ชุมทางใหญ่', 'Grand Carrefour') },
+  { id: 'q0', x: C.x, y: C.y - 22, symbol: 'any', hub: true, name: t('Grand Hub', 'Grand Carrefour') },
   ...[...SPIRAL].slice(0, 50).map((c, i): StationSpec => {
     const n = i + 1.6;
     const r = 43 * Math.sqrt(n);
@@ -49,9 +49,9 @@ export const paris = compileCity({
   id: 'paris',
   version: 1,
   name: t('ปารีส', 'Paris'),
-  subtitle: t('สะพานและชุมทาง', 'Bridges & Junctions'),
+  subtitle: t('Bridges & Junctions', 'Bridges & Junctions'),
   description: t(
-    'ข้ามแม่น้ำได้เฉพาะที่สะพาน รักษาสมดุลสองฝั่ง และพาทุกสายผ่านชุมทางใหญ่กลางเมือง',
+    'ข้ามแม่น้ำได้เฉพาะที่สะพาน สร้างให้สมดุลทั้งสองฝั่ง และพาทุกสายผ่าน Grand Hub กลางเมือง',
     'The river can only be crossed at bridges. Balance both banks and bring every line through the Grand Carrefour.',
   ),
   complexity: 2,
@@ -80,10 +80,10 @@ export const paris = compileCity({
       ['q37', 'q45'], ['q24', 'q16'], ['q3', 'q8'], ['q0', 'q5'], ['q0', 'q2'], ['q7', 'q10'], ['q15', 'q23'], ['q28', 'q36'],
     ] },
   lines: [
-    { id: 'madder', name: t('สายครั่งแดง', 'Madder Line'), starts: ['q32'] },
-    { id: 'lapis', name: t('สายน้ำเงินลาพิส', 'Lapis Line'), starts: ['q28'] },
-    { id: 'turmeric', name: t('สายขมิ้น', 'Turmeric Line'), starts: ['q31'] },
-    { id: 'plum', name: t('สายพลัม', 'Plum Line'), starts: ['q38'] },
+    { id: 'madder', name: t('สาย Madder', 'Madder Line'), starts: ['q32'] },
+    { id: 'lapis', name: t('สาย Lapis', 'Lapis Line'), starts: ['q28'] },
+    { id: 'turmeric', name: t('สาย Turmeric', 'Turmeric Line'), starts: ['q31'] },
+    { id: 'plum', name: t('สาย Plum', 'Plum Line'), starts: ['q38'] },
   ],
   deck: makeDeck({ copies: 2, wilds: 1, branches: 2 }),
   roundEnd: { type: 'reveals', count: 9 },
@@ -105,11 +105,11 @@ export const paris = compileCity({
   modules: ['objectives', 'specials'],
   tieBreakers: ['interchanges', 'landmarks', 'districts'],
   rules: [
-    t('แต่ละรอบเปิดการ์ด 9 ใบจากสำรับ 11 ใบ (มีการ์ดแยกราง 2 ใบ)', 'Each round reveals 9 of 11 cards, including two branch cards.'),
+    t('แต่ละรอบเปิดการ์ด 9 ใบจากสำรับ 11 ใบ (มีการ์ด Branch 2 ใบ)', 'Each round reveals 9 of 11 cards, including two branch cards.'),
     t('รางข้ามแม่น้ำได้เฉพาะเส้นสะพาน สะพานแต่ละแห่งใช้ได้ครั้งเดียวต่อผู้เล่น', 'Track may only cross the river on bridges, and you may use each bridge once.'),
     t('คะแนนสาย = 2 ต่อย่าน + ตารางสะพาน 2/5/9/14 + จำนวนสถานีของฝั่งที่น้อยกว่า', 'Line score = 2 per district + bridges 2/5/9/14 + stations on your smaller bank.'),
-    t('แลนด์มาร์กในสายเดียวกัน 1/4/8/13 และผ่านชุมทางใหญ่ +3', 'Landmarks on one line score 1/4/8/13; passing the Grand Carrefour scores 3.'),
-    t('จบเกม: จุดเชื่อมต่อ 2/3/4 สาย = 3/7/13 คะแนน', 'End of game: interchanges of 2/3/4 lines score 3/7/13.'),
+    t('Landmark ในสายเดียวกัน 1/4/8/13 และผ่าน Grand Hub +3', 'Landmarks on one line score 1/4/8/13; passing the Grand Carrefour scores 3.'),
+    t('จบเกม: Interchange 2/3/4 สาย = 3/7/13 คะแนน', 'End of game: interchanges of 2/3/4 lines score 3/7/13.'),
   ],
   houseRuleNote: t(
     'กติกาและแผนที่เป็นของเกมนี้เอง ชื่อย่านเป็นชื่อสมมติ ไม่ใช่การทำซ้ำเกมกระดานใด',

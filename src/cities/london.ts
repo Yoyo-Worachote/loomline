@@ -17,15 +17,15 @@ const ROWS: { key: string; offset: number; follow: number; x0: number; step: num
 ];
 
 const FLAGS: Record<string, Partial<StationSpec>> = {
-  a3: { landmark: true, name: t('สวนราชพฤกษ์', 'Regal Meadow') },
-  b7: { name: t('ชุมทางเข็มทิศ', 'Compass Junction') },
-  b4: { landmark: true, name: t('หอนาฬิกาทองแดง', 'Copper Clock') },
-  c2: { landmark: true, name: t('ตลาดใบชา', 'Tea Exchange') },
-  c7: { landmark: true, name: t('ป้อมอีกา', 'Raven Keep') },
-  d5: { landmark: true, name: t('กงล้อเมฆ', 'Cloud Wheel') },
-  e2: { name: t('ชุมทางโรงสี', 'Mill Junction') },
-  e7: { landmark: true, name: t('อู่เรือสำเภา', 'Clipper Dock') },
-  f4: { landmark: true, name: t('หอดูดาวเนินเขียว', 'Green Hill Dome') },
+  a3: { landmark: true, name: t('Regal Meadow', 'Regal Meadow') },
+  b7: { name: t('Compass Junction', 'Compass Junction') },
+  b4: { landmark: true, name: t('Copper Clock', 'Copper Clock') },
+  c2: { landmark: true, name: t('Tea Exchange', 'Tea Exchange') },
+  c7: { landmark: true, name: t('Raven Keep', 'Raven Keep') },
+  d5: { landmark: true, name: t('Cloud Wheel', 'Cloud Wheel') },
+  e2: { name: t('Mill Junction', 'Mill Junction') },
+  e7: { landmark: true, name: t('Clipper Dock', 'Clipper Dock') },
+  f4: { landmark: true, name: t('Green Hill Dome', 'Green Hill Dome') },
 };
 
 const stations: StationSpec[] = ROWS.flatMap((r) =>
@@ -39,19 +39,19 @@ const stations: StationSpec[] = ROWS.flatMap((r) =>
 
 const COLUMNS = [100, 300, 500, 700, 900];
 const NORTH = [
-  ['n1', 'เวสต์เมียร์', 'Westmere'], ['n2', 'คิงส์โฟลด์', 'Kingsfold'], ['n3', 'แลนเทิร์นฮิลล์', 'Lantern Hill'],
-  ['n4', 'ชอร์วิก', 'Shorewick'], ['n5', 'อีสต์วาร์ฟ', 'Eastwharf'],
+  ['n1', 'Westmere', 'Westmere'], ['n2', 'Kingsfold', 'Kingsfold'], ['n3', 'Lantern Hill', 'Lantern Hill'],
+  ['n4', 'Shorewick', 'Shorewick'], ['n5', 'Eastwharf', 'Eastwharf'],
 ] as const;
 const SOUTH = [
-  ['s1', 'ฟูลมาร์ช', 'Fulmarsh'], ['s2', 'แบตเตอร์มิลล์', 'Battermill'], ['s3', 'คอบเบิลแบงก์', 'Cobblebank'],
-  ['s4', 'แทนเนอร์ยาร์ด', "Tanner's Yard"], ['s5', 'กรีนไฮธ์', 'Greenhythe'],
+  ['s1', 'Fulmarsh', 'Fulmarsh'], ['s2', 'Battermill', 'Battermill'], ['s3', 'Cobblebank', 'Cobblebank'],
+  ['s4', "Tanner's Yard", "Tanner's Yard"], ['s5', 'Greenhythe', 'Greenhythe'],
 ] as const;
 
 export const london = compileCity({
   id: 'london',
   version: 1,
   name: t('ลอนดอน', 'London'),
-  subtitle: t('สายน้ำและย่านเมือง', 'River & Districts'),
+  subtitle: t('River & Districts', 'River & Districts'),
   description: t(
     'ข้ามแม่น้ำให้บ่อย กระจายให้หลายย่าน แต่อย่าลืมกระจุกสถานีไว้ในย่านเดียวเพื่อคูณคะแนน',
     'Cross the river often and spread across districts, while packing one district for a bigger multiplier.',
@@ -74,10 +74,10 @@ export const london = compileCity({
   ],
   graph: { maxDist: 172, clearance: 24, riverMode: 'free' },
   lines: [
-    { id: 'madder', name: t('สายครั่งแดง', 'Madder Line'), starts: ['b2'] },
-    { id: 'lapis', name: t('สายน้ำเงินลาพิส', 'Lapis Line'), starts: ['e7'] },
-    { id: 'turmeric', name: t('สายขมิ้น', 'Turmeric Line'), starts: ['e3'] },
-    { id: 'plum', name: t('สายพลัม', 'Plum Line'), starts: ['b8'] },
+    { id: 'madder', name: t('สาย Madder', 'Madder Line'), starts: ['b2'] },
+    { id: 'lapis', name: t('สาย Lapis', 'Lapis Line'), starts: ['e7'] },
+    { id: 'turmeric', name: t('สาย Turmeric', 'Turmeric Line'), starts: ['e3'] },
+    { id: 'plum', name: t('สาย Plum', 'Plum Line'), starts: ['b8'] },
   ],
   deck: makeDeck({ copies: 2, wilds: 1, branches: 1 }),
   roundEnd: { type: 'reveals', count: 8 },
@@ -99,8 +99,8 @@ export const london = compileCity({
     t('แต่ละรอบเปิดการ์ด 8 ใบจากสำรับ 10 ใบ', 'Each round reveals 8 cards from a 10-card deck.'),
     t('คะแนนสาย = จำนวนย่านที่ไปถึง × จำนวนสถานีในย่านที่มีมากที่สุด', 'Line score = districts visited × stations in your busiest district.'),
     t('ทุกครั้งที่รางข้ามแม่น้ำ +3', 'Each time the line crosses the river: +3.'),
-    t('จบเกม: แลนด์มาร์กยิ่งผ่านหลายสายยิ่งไต่ตารางคะแนน', 'End of game: every line visiting a landmark climbs the landmark track.'),
-    t('จบเกม: จุดเชื่อมต่อ 2/3/4 สาย = 2/6/11 คะแนน', 'End of game: interchanges of 2/3/4 lines score 2/6/11.'),
+    t('จบเกม: Landmark ยิ่งมีหลายสายผ่าน ยิ่งได้คะแนนมาก', 'End of game: every line visiting a landmark climbs the landmark track.'),
+    t('จบเกม: Interchange 2/3/4 สาย = 2/6/11 คะแนน', 'End of game: interchanges of 2/3/4 lines score 2/6/11.'),
   ],
   houseRuleNote: t(
     'กติกาและแผนที่เป็นของเกมนี้เอง ไม่ใช่การทำซ้ำเกมกระดานใด',

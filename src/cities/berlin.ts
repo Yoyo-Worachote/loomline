@@ -17,13 +17,13 @@ const LATTICE = [
 ];
 
 const FLAGS: Record<string, Partial<StationSpec>> = {
-  r2c2: { landmark: true, name: t('สวนสัตว์กระจก', 'Mirror Menagerie') },
-  r2c4: { landmark: true, name: t('หอส่งคลื่น', 'Signal Spire') },
-  r4c3: { hub: true, name: t('จัตุรัสกลาง', 'Mittelplatz') },
-  r5c1: { landmark: true, name: t('ป่าสนเมือง', 'Pine Common') },
-  r5c5: { landmark: true, name: t('กำแพงจิตรกรรม', 'Mural Mile') },
-  r6c3: { landmark: true, name: t('ลานบินเก่า', 'Old Airfield') },
-  r3c4: { landmark: true, name: t('เกาะหอศิลป์', 'Gallery Isle') },
+  r2c2: { landmark: true, name: t('Mirror Menagerie', 'Mirror Menagerie') },
+  r2c4: { landmark: true, name: t('Signal Spire', 'Signal Spire') },
+  r4c3: { hub: true, name: t('มิตเทลพลัทซ์', 'Mittelplatz') },
+  r5c1: { landmark: true, name: t('Pine Common', 'Pine Common') },
+  r5c5: { landmark: true, name: t('Mural Mile', 'Mural Mile') },
+  r6c3: { landmark: true, name: t('Old Airfield', 'Old Airfield') },
+  r3c4: { landmark: true, name: t('Gallery Isle', 'Gallery Isle') },
 };
 
 const stations: StationSpec[] = LATTICE.flatMap((row, r) => {
@@ -48,9 +48,9 @@ export const berlin = compileCity({
   id: 'berlin',
   version: 1,
   name: t('เบอร์ลิน', 'Berlin'),
-  subtitle: t('สองจุดเริ่มต้น หนึ่งโครงข่าย', 'Two Starts, One Network'),
+  subtitle: t('Two Starts, One Network', 'Two Starts, One Network'),
   description: t(
-    'ทุกสายเริ่มจากสองฝั่งพร้อมกัน เชื่อมให้ติดกันเพื่อรับโบนัส และใช้การ์ดอุโมงค์ลอดคลอง',
+    'ทุกสายเริ่มจากสองฝั่งพร้อมกัน Link ให้ติดกันเพื่อรับ Bonus และใช้การ์ด Tunnel ลอดคลอง',
     'Every line starts on both sides of town. Link the halves for a bonus, and tunnel beneath the canal.',
   ),
   complexity: 3,
@@ -76,10 +76,10 @@ export const berlin = compileCity({
       ['r2c0', 'r3c1'], ['r3c2', 'r4c1'], ['r4c3', 'r5c3'], ['r5c4', 'r6c4'], ['r5c5', 'r6c5'],
     ] },
   lines: [
-    { id: 'madder', name: t('สายครั่งแดง', 'Madder Line'), starts: ['r2c1', 'r6c4'] },
-    { id: 'lapis', name: t('สายน้ำเงินลาพิส', 'Lapis Line'), starts: ['r3c1', 'r5c4'] },
-    { id: 'turmeric', name: t('สายขมิ้น', 'Turmeric Line'), starts: ['r7c2', 'r1c4'] },
-    { id: 'plum', name: t('สายพลัม', 'Plum Line'), starts: ['r5c2', 'r3c5'] },
+    { id: 'madder', name: t('สาย Madder', 'Madder Line'), starts: ['r2c1', 'r6c4'] },
+    { id: 'lapis', name: t('สาย Lapis', 'Lapis Line'), starts: ['r3c1', 'r5c4'] },
+    { id: 'turmeric', name: t('สาย Turmeric', 'Turmeric Line'), starts: ['r7c2', 'r1c4'] },
+    { id: 'plum', name: t('สาย Plum', 'Plum Line'), starts: ['r5c2', 'r3c5'] },
   ],
   deck: makeDeck({ copies: 2, wilds: 1, branches: 1, tunnels: 2, tunnelOnWild: true }),
   roundEnd: { type: 'reveals', count: 10 },
@@ -105,12 +105,12 @@ export const berlin = compileCity({
   modules: ['objectives', 'specials'],
   tieBreakers: ['interchanges', 'districts', 'stations'],
   rules: [
-    t('ทุกสีมีสถานีต้นทาง 2 แห่ง ต่อจากปลายรางของฝั่งไหนก็ได้', 'Every line has two start stations; extend from any endpoint of either half.'),
-    t('เชื่อมสองส่วนของสีเดียวกันได้ครั้งเดียว: โบนัส +10 ในสายนั้น', 'Joining the two halves of a colour is allowed once and scores +10 for that line.'),
-    t('เส้นประลอดคลองต้องใช้การ์ดอุโมงค์หรือการ์ดอิสระ', 'Dashed canal edges need a tunnel or wild card.'),
-    t('คะแนนสาย = 2 ต่อย่าน + 1 ต่อสถานี + แลนด์มาร์ก 2/4/7/10', 'Line score = 2 per district + 1 per station + landmarks 2/4/7/10.'),
-    t('จบเกม: เชื่อมสำเร็จ 2/3/4 สี = 4/10/18 และถ้ารางทั้งหมดต่อกันเป็นโครงข่ายเดียว +8', 'End of game: 2/3/4 linked colours score 4/10/18; one fully connected network scores 8.'),
-    t('จบเกม: จุดเชื่อมต่อ 2/3/4 สาย = 1/4/8 คะแนน', 'End of game: interchanges of 2/3/4 lines score 1/4/8.'),
+    t('ทุกสีมีสถานีเริ่มต้น 2 แห่ง ต่อจากปลายรางของฝั่งไหนก็ได้', 'Every line has two start stations; extend from any endpoint of either half.'),
+    t('Link สองส่วนของสีเดียวกันได้ครั้งเดียว: Bonus +10 ในสายนั้น', 'Joining the two halves of a colour is allowed once and scores +10 for that line.'),
+    t('เส้นประลอดคลองต้องใช้การ์ด Tunnel หรือ Wild', 'Dashed canal edges need a tunnel or wild card.'),
+    t('คะแนนสาย = 2 ต่อย่าน + 1 ต่อสถานี + Landmark 2/4/7/10', 'Line score = 2 per district + 1 per station + landmarks 2/4/7/10.'),
+    t('จบเกม: Link สำเร็จ 2/3/4 สี = 4/10/18 และถ้ารางทั้งหมดต่อกันเป็น One Network +8', 'End of game: 2/3/4 linked colours score 4/10/18; one fully connected network scores 8.'),
+    t('จบเกม: Interchange 2/3/4 สาย = 1/4/8 คะแนน', 'End of game: interchanges of 2/3/4 lines score 1/4/8.'),
   ],
   houseRuleNote: t(
     'กติกาและแผนที่เป็นของเกมนี้เอง คลองและชื่อย่านเป็นเรื่องสมมติ ไม่ใช่การทำซ้ำเกมกระดานใด',

@@ -22,7 +22,7 @@ const arc = (from: number, to: number, rx: number, ry: number, steps = 8): Point
   Array.from({ length: steps + 1 }, (_, i) => polar(from + ((to - from) * i) / steps, rx, ry));
 
 const districts: DistrictSpec[] = [
-  { id: 'core', name: t('สวนกลาง', 'Garden Core'), polygon: arc(0, 354, CORE.rx, CORE.ry, 59) },
+  { id: 'core', name: t('Garden Core', 'Garden Core'), polygon: arc(0, 354, CORE.rx, CORE.ry, 59) },
   ...SECTORS.map(([id, th, en], i): DistrictSpec => {
     const a = i * 45 - 22.5;
     return {
@@ -54,18 +54,18 @@ const ring = (key: string, n: number, offset: number, rx: number, ry: number, sy
   });
 
 const LANDMARKS: Record<string, Partial<StationSpec>> = {
-  o2: { landmark: true, name: t('หอคอยเหล็กส้ม', 'Vermilion Mast') },
-  o6: { landmark: true, name: t('สี่แยกพันก้าว', 'Thousand Step Crossing') },
-  o10: { landmark: true, name: t('ศาลเจ้าต้นการบูร', 'Camphor Shrine') },
-  o14: { landmark: true, name: t('ตรอกโคมแดง', 'Paper Lamp Alley') },
-  p3: { name: t('ชุมทางวงแหวนใต้', 'South Loop Gate') },
-  p9: { name: t('ชุมทางวงแหวนเหนือ', 'North Loop Gate') },
+  o2: { landmark: true, name: t('Vermilion Mast', 'Vermilion Mast') },
+  o6: { landmark: true, name: t('Thousand Step Crossing', 'Thousand Step Crossing') },
+  o10: { landmark: true, name: t('Camphor Shrine', 'Camphor Shrine') },
+  o14: { landmark: true, name: t('Paper Lamp Alley', 'Paper Lamp Alley') },
+  p3: { name: t('South Loop Gate', 'South Loop Gate') },
+  p9: { name: t('North Loop Gate', 'North Loop Gate') },
 };
 
 const STAMPED = new Set(['o1', 'o3', 'o5', 'o7', 'o9', 'o11', 'o13', 'o15']);
 
 const stations: StationSpec[] = [
-  { id: 'c0', x: C.x, y: C.y, symbol: 'any', district: 'core', hub: true, stamp: true, name: t('สวนหมื่นใบ', 'Myriad Leaf Garden') },
+  { id: 'c0', x: C.x, y: C.y, symbol: 'any', district: 'core', hub: true, stamp: true, name: t('Myriad Leaf Garden', 'Myriad Leaf Garden') },
   ...ring('i', 6, 30, 104, 78, 'dhslhs', () => ({ district: 'core' })),
   ...ring('p', 12, 15, 222, 164, 'lsdhdlshslhd', (_, i) => ({ loop: true, ...LANDMARKS[`p${i + 1}`] })),
   ...ring('o', 16, 11.25, 366, 258, 'hdlsldhsdhslhlds', (_, i) => ({ ...(STAMPED.has(`o${i + 1}`) ? { stamp: true } : {}), ...LANDMARKS[`o${i + 1}`] })),
@@ -85,9 +85,9 @@ export const tokyo = compileCity({
   id: 'tokyo',
   version: 1,
   name: t('โตเกียว', 'Tokyo'),
-  subtitle: t('วงแหวนกลางและตราประทับ', 'Central Loop & Stamps'),
+  subtitle: t('Central Loop & Stamps', 'Central Loop & Stamps'),
   description: t(
-    'ล่าตราประทับจาก 13 ย่าน และอย่าปล่อยให้สถานีบนวงแหวนกลางถูกทิ้ง รอบจะจบเมื่อโคมดวงที่สี่สว่าง',
+    'สะสม Stamp จาก 13 ย่าน และอย่าลืมสถานีบน Central Loop แต่ละรอบจบเมื่อเปิดการ์ด Lantern ใบที่ 4',
     'Collect stamps from 13 districts and leave no loop station behind. Rounds end when the fourth lantern lights.',
   ),
   complexity: 2,
@@ -100,10 +100,10 @@ export const tokyo = compileCity({
   districts,
   graph: { maxDist: 172, clearance: 22 },
   lines: [
-    { id: 'madder', name: t('สายครั่งแดง', 'Madder Line'), starts: ['o4'] },
-    { id: 'lapis', name: t('สายน้ำเงินลาพิส', 'Lapis Line'), starts: ['o8'] },
-    { id: 'turmeric', name: t('สายขมิ้น', 'Turmeric Line'), starts: ['o12'] },
-    { id: 'plum', name: t('สายพลัม', 'Plum Line'), starts: ['o16'] },
+    { id: 'madder', name: t('สาย Madder', 'Madder Line'), starts: ['o4'] },
+    { id: 'lapis', name: t('สาย Lapis', 'Lapis Line'), starts: ['o8'] },
+    { id: 'turmeric', name: t('สาย Turmeric', 'Turmeric Line'), starts: ['o12'] },
+    { id: 'plum', name: t('สาย Plum', 'Plum Line'), starts: ['o16'] },
   ],
   deck: makeDeck({ copies: 2, wilds: 1, branches: 1, lanterns: ['drop1', 'leaf1', 'spark1', 'hex1', 'branch1'] }),
   roundEnd: { type: 'lanterns', count: 4 },
@@ -124,14 +124,14 @@ export const tokyo = compileCity({
   modules: ['objectives', 'specials'],
   tieBreakers: ['districts', 'interchanges', 'stations'],
   rules: [
-    t('สำรับ 10 ใบมีโคม 5 ใบ รอบจบทันทีหลังการ์ดโคมใบที่ 4', 'Five of the ten cards carry a lantern; the round ends after the fourth lantern card.'),
+    t('สำรับ 10 ใบมีการ์ด Lantern 5 ใบ รอบจบหลังการ์ด Lantern ใบที่ 4', 'Five of the ten cards carry a lantern; the round ends after the fourth lantern card.'),
     t('คะแนนสาย = 2 ต่อย่านที่ไปถึง + 2 ต่อสถานีในย่านที่มีมากที่สุด', 'Line score = 2 per district visited + 2 per station in your busiest district.'),
-    t('จบเกม: ตราประทับ (ย่านละ 1 ดวง) ยิ่งครบยิ่งได้มาก', 'End of game: one stamp per district, worth more the more you collect.'),
-    t('จบเกม: สถานีวงแหวนที่ไม่มีสายผ่าน −2 ต่อสถานี ถ้าครบทั้ง 12 ได้ +10', 'End of game: −2 per unvisited loop station, or +10 if all 12 are visited.'),
-    t('จบเกม: จุดเชื่อมต่อ 2/3/4 สาย = 2/5/9 คะแนน', 'End of game: interchanges of 2/3/4 lines score 2/5/9.'),
+    t('จบเกม: Stamp (ย่านละ 1 ดวง) ยิ่งสะสมมากยิ่งได้คะแนนมาก', 'End of game: one stamp per district, worth more the more you collect.'),
+    t('จบเกม: สถานีบน Loop ที่ไม่มีสายผ่าน −2 ต่อสถานี ถ้าครบทั้ง 12 ได้ +10', 'End of game: −2 per unvisited loop station, or +10 if all 12 are visited.'),
+    t('จบเกม: Interchange 2/3/4 สาย = 2/5/9 คะแนน', 'End of game: interchanges of 2/3/4 lines score 2/5/9.'),
   ],
   houseRuleNote: t(
-    'กติกาและแผนที่เป็นของเกมนี้เอง วงแหวนเป็นแผนผังสมมติ ไม่ใช่เส้นทางจริงหรือเกมกระดานใด',
+    'กติกาและแผนที่เป็นของเกมนี้เอง Loop เป็นแผนผังสมมติ ไม่ใช่เส้นทางจริงหรือเกมกระดานใด',
     'Rules and map were designed for this game; the loop is invented and matches no real line or published game.',
   ),
 });

@@ -8,7 +8,7 @@ All stages in `CLAUDE.md` have a working implementation. The app is playable end
 
 | Stage | State |
 | --- | --- |
-| 0 Discovery | Folder held only the two spec files; not a git repository (none was created) |
+| 0 Discovery | Folder held only the two spec files; git was set up later; source is at github.com/Yoyo-Worachote/loomline |
 | 1 Game engine | Done |
 | 2 Multiplayer | Done: Node WebSocket server, server-authoritative |
 | 3 London | Done |
@@ -32,9 +32,11 @@ All stages in `CLAUDE.md` have a working implementation. The app is playable end
 
 - Public hosting preparation: `render.yaml`, invite panel (code, link, share sheet, QR), pasted links accepted as codes, keep-awake ping, per-visitor limits behind a proxy. A clean copy of `_upload` was installed, built and started with Render's settings on this machine, including a WebSocket with a public host and origin.
 
+- Live on Render (free plan): https://loomline-hhv9.onrender.com. Over HTTPS/`wss`, two browser identities joined one room and finished a full London game. No console errors.
+
 ## Not verified
 
-- Internet deployment, HTTPS/`wss`, and play from separate physical devices.
+- Play from separate physical devices; waking from the free plan's sleep.
 - The `Dockerfile` (Docker is not available here).
 - Real touch hardware and pinch zoom; screen readers.
 - Balance with human players. Bots only: see `npm run simulate`.
@@ -47,7 +49,7 @@ All stages in `CLAUDE.md` have a working implementation. The app is playable end
 
 ## Next recommended task
 
-Upload `_upload` to GitHub and deploy it with the Render Blueprint (README, Deployment), then play one full game from two physical devices, and fix what that shows. After that: tune scoring from real play.
+Play one full game from two physical devices, and fix what that shows. After that: tune scoring from real play.
 
 ## Bugs found and fixed while testing
 
