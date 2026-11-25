@@ -1,0 +1,17 @@
+# Deploy on Render (https://render.com): New + > Blueprint > choose this repository.
+services:
+  - type: web
+    name: loomline
+    runtime: node
+    plan: free
+    region: singapore
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: node dist/server.mjs
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: CLIENT_IP_HEADER
+        value: cf-connecting-ip
